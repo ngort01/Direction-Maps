@@ -1,0 +1,6 @@
+{
+	"preset": "google",
+	"requireCamelCaseOrUpperCaseIdentifiers": null,
+	"fileExtensions": [".js", ".jsx"],
+	"esnext": true
+}

@@ -1,0 +1,47 @@
+@mixin transition ($property, $duration, $timing_func) {
+	-webkit-transition: $property $duration $timing_func;
+  	-moz-transition: $property $duration $timing_func;
+  	-o-transition: $property $duration $timing_func;
+  	-ms-transition: $property $duration $timing_func;
+  	transition: $property $duration $timing_func;
+}
+
+@mixin translateXY($x, $y) {
+    -webkit-transform: translate($x, $y);
+    -ms-transform: translate($x, $y);
+    -o-transform: translate($x, $y);
+    -moz-transform: translate($x, $y);
+    transform: translate($x, $y);
+}
+
+@mixin translateZ($n) {
+	-webkit-transform: translateZ($n);
+ 	-moz-transform: translateZ($n);
+  	-ms-transform: translateZ($n);
+  	-o-transform: translateZ($n);
+  	transform: translateZ($n);
+}
+
+@mixin rotate($deg) {
+  -webkit-transform: rotate($deg);
+  -moz-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    -o-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+@mixin backface($v) {
+	-webkit-backface-visibility: $v;
+  	-moz-backface-visibility: $v;
+  	-ms-backface-visibility: $v;
+  	-o-backface-visibility: $v;
+  	backface-visibility: $v;
+}
+
+@mixin perspective($n) {
+	-webkit-perspective: $n;
+    -moz-perspective: $n;
+    -ms-perspective: $n;
+    -o-perspective: $n;
+    perspective: $n;
+}

@@ -1,0 +1,13 @@
+@mixin box-shadow($alpha, $h, $v, $blur, $spread) {
+  -webkit-box-shadow: rgba(0, 0, 0, $alpha) $h $v $blur $spread;
+  -moz-box-shadow: rgba(0, 0, 0, $alpha) $h $v $blur $spread;
+  -ms-box-shadow: rgba(0, 0, 0, $alpha) $h $v $blur $spread;
+  box-shadow: rgba(0, 0, 0, $alpha) $h $v $blur $spread;
+}
+
+@mixin no-shadow() {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  box-shadow: none;
+}
