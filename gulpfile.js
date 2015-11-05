@@ -11,30 +11,24 @@ var webpackConfig = require('./webpack.config.js');
 var _ = require('lodash');
 
 var iconfont = require('gulp-iconfont');
-var generateIconSass = require('./gulp/iconFont/generateIconSass');
+var iconfontCss = require('gulp-iconfont-css');
 
-var iconFontsConfig = {
-  name: 'Gulp Starter Icons',
-  src: './app/icons/*.svg',
-  dest: './app/fonts',
-  sassDest: './app/sass',
-  template: './gulp/iconFont/template.sass.swig',
-  sassOutputName: '_icons.sass',
-  fontPath: '../fonts',
-  className: 'icon',
-  options: {
-    fontName: 'Post-Creator-Icons',
-    appendCodepoints: true,
-    normalize: false,
-  }
-};
+var fontName = 'Icons';
 
-// convert .svg icons to fonts
 gulp.task('iconFont', function() {
-  return gulp.src(iconFontsConfig.src)
-      .pipe(iconfont(iconFontsConfig.options))
-      .on('codepoints', generateIconSass(iconFontsConfig))
-      .pipe(gulp.dest(iconFontsConfig.dest));
+  gulp.src(['app/assets/icons/*.svg'])
+    .pipe(iconfontCss({
+      fontName: fontName,
+      path: 'scss',
+      targetPath: '../../../sass/_icons.scss',
+      fontPath: '../assets/fonts/icons/'
+    }))
+    .pipe(iconfont({
+      fontName: fontName,
+      formats: ['ttf', 'eot', 'woff', 'svg'],
+      normalize: true
+    }))
+    .pipe(gulp.dest('app/assets/fonts/icons/'));
 });
 
 // The development server (the recommended option for development)
