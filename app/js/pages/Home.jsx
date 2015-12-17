@@ -14,9 +14,11 @@ const Home = React.createClass({
   },
 
   render() {
+    let {destination} = this.props;
+
     return (
       <div className='home'>
-        <MapView />
+        <MapView destination={destination}/>
         <button
 					className='btn btn-float icon icon-search'
 					onClick={this._enableSearch}

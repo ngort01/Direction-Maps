@@ -33,7 +33,11 @@ const TitleBar = React.createClass({
 
   render() {
     let {search} = this.state;
-    let comp = search ? <TitleBarSearch/> : <TitleBarStandard/>;
+    let {geoCodeResults, destination} = this.props;
+    let comp = search ?
+                <TitleBarSearch geoCodeResults={geoCodeResults} destination={destination}/>
+                :
+                <TitleBarStandard/>;
 
     return (
       <header className='bar bar-nav'>

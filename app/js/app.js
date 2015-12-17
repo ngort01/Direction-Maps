@@ -4,6 +4,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import createHashHistory from 'history/lib/createHashHistory';
 import { Router, Route, Link, History, IndexRoute } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import 'ratchet';
 import 'ratchet.css';
@@ -15,6 +16,11 @@ import About from './pages/About';
 import MyMaps from './pages/MyMaps';
 // components
 import TitleBar from './components/TitleBar';
+import DirMap from './components/DirMap';
+// stores
+import GeoCodeStore from './stores/GeoCodeStore';
+import UIStore from './stores/UIStore';
+import DestinationStore from './stores/DestinationStore';
 
 // hash location is needed on mobile device
 //const history = window.cordova ? createHashHistory() : createBrowserHistory();
@@ -22,14 +28,51 @@ const history = createHashHistory();
 
 const App = React.createClass({
 
+  getInitialState() {
+    return {
+      geoCodeResults: GeoCodeStore.getGeocodeResult(),
+      destination: DestinationStore.getDestination(),
+      showDirMap: UIStore.getDirMapStatus()
+    };
+  },
+
+  componentDidMount() {
+    GeoCodeStore.addChangeListener(this._onChange);
+    DestinationStore.addChangeListener(this._onChange);
+    UIStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount() {
+    GeoCodeStore.removeChangeListener(this._onChange);
+    DestinationStore.removeChangeListener(this._onChange);
+    UIStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange() {
+    this.setState({
+      geoCodeResults: GeoCodeStore.getGeocodeResult(),
+      destination: DestinationStore.getDestination(),
+      showDirMap: UIStore.getDirMapStatus()
+    });
+  },
+
   render() {
+    let {geoCodeResults, destination, showDirMap} = this.state;
 
     return (
       <div className='app'>
-        <TitleBar/>
+        <TitleBar geoCodeResults={geoCodeResults} destination={destination}/>
         <div className='content'>
-          {this.props.children}
+          {this.props.children && React.cloneElement(this.props.children, {
+            destination: destination
+          })}
         </div>
+          <ReactCSSTransitionGroup
+            component='div' transitionName='subpage'
+            transitionEnterTimeout={300} transitionLeaveTimeout={300}
+          >
+            {showDirMap ? <DirMap key='dirmap'/> : null}
+          </ReactCSSTransitionGroup>
       </div>
     );
   }

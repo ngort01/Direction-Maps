@@ -3,15 +3,10 @@ import Constants, {ActionTypes} from '../constants/Constants';
 
 module.exports = {
 
-  toggleSearch() {
+  getDirMap(lat, lng, type) {
+    //'http://fiddle.jshell.net/favicon.png'
     AppDispatcher.dispatch({
-      type: ActionTypes.TOGGLE_SEARCH,
-    });
-  },
-
-  toggleDirMap() {
-    AppDispatcher.dispatch({
-      type: ActionTypes.TOGGLE_DIR_MAP,
+      type: ActionTypes.GET_DIR_MAP,
     });
   }
 };

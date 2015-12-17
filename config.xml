@@ -21,6 +21,7 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <preference name="StatusBarBackgroundColor" value="#1976D2" />
     </platform>
 	
 </widget>

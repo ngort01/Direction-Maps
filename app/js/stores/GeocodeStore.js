@@ -5,11 +5,10 @@ import assign from 'object-assign';
 
 const CHANGE_EVENT = 'change';
 
-let _enableSearch = false;
-let _showDirMap = false;
+let _geocodeResult = {};
 
 // the store
-const UIStore = assign({}, EventEmitter.prototype, {
+const GeocodeStore = assign({}, EventEmitter.prototype, {
   emitChange() {
     this.emit(CHANGE_EVENT);
   },
@@ -22,27 +21,23 @@ const UIStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   },
 
-  getSearchStatus() {
-    return _enableSearch;
-  },
-
-  getDirMapStatus() {
-    return _showDirMap;
+  getGeocodeResult() {
+    return _geocodeResult;
   }
 });
 
-UIStore.dispatchToken = AppDispatcher.register(action => {
+GeocodeStore.dispatchToken = AppDispatcher.register(action => {
 
   switch (action.type) {
 
-    case ActionTypes.TOGGLE_SEARCH:
-      _enableSearch = !_enableSearch;
-      UIStore.emitChange();
+    case ActionTypes.GEOCODE:
+      _geocodeResult = JSON.parse(action.result);
+      GeocodeStore.emitChange();
       break;
 
-    case ActionTypes.TOGGLE_DIR_MAP:
-      _showDirMap = !_showDirMap;
-      UIStore.emitChange();
+    case ActionTypes.CLEAR_GEOCODE_RESULT:
+      _geocodeResult = {};
+      GeocodeStore.emitChange();
       break;
 
     default:
@@ -50,4 +45,4 @@ UIStore.dispatchToken = AppDispatcher.register(action => {
   }
 });
 
-module.exports = UIStore;
+module.exports = GeocodeStore;

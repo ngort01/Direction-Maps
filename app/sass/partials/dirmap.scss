@@ -1,0 +1,25 @@
+.dirmap {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	z-index: 10;
+}
+
+.img-viewer {
+	height: 90%;
+}
+
+.btn-flat {
+  font-size: 18px;
+  color: $blue;
+  border: none;
+  border-radius: 0;
+  @include no-shadow();
+  &.active,
+  &:focus {
+    outline: none;
+    background-color: transparent;
+    color: #29B6F6;
+  }
+}

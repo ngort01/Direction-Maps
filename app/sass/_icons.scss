@@ -26,14 +26,17 @@
 @function icon-char($filename) {
 	$char: "";
 
-	@if $filename == bike {
+	@if $filename == arrow_right {
 		$char: "\E001";
 	}
-	@if $filename == car {
+	@if $filename == bike {
 		$char: "\E002";
 	}
-	@if $filename == pedestrian {
+	@if $filename == car {
 		$char: "\E003";
+	}
+	@if $filename == pedestrian {
+		$char: "\E004";
 	}
 
 	@return $char;
@@ -50,6 +53,9 @@
 	}
 }
 
+.icon-arrow_right {
+	@include icon(arrow_right);
+}
 .icon-bike {
 	@include icon(bike);
 }

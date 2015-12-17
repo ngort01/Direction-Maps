@@ -5,11 +5,10 @@ import assign from 'object-assign';
 
 const CHANGE_EVENT = 'change';
 
-let _enableSearch = false;
-let _showDirMap = false;
+let _destination = {};
 
 // the store
-const UIStore = assign({}, EventEmitter.prototype, {
+const DestinationStore = assign({}, EventEmitter.prototype, {
   emitChange() {
     this.emit(CHANGE_EVENT);
   },
@@ -22,27 +21,18 @@ const UIStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   },
 
-  getSearchStatus() {
-    return _enableSearch;
-  },
-
-  getDirMapStatus() {
-    return _showDirMap;
+  getDestination() {
+    return _destination;
   }
 });
 
-UIStore.dispatchToken = AppDispatcher.register(action => {
+DestinationStore.dispatchToken = AppDispatcher.register(action => {
 
   switch (action.type) {
 
-    case ActionTypes.TOGGLE_SEARCH:
-      _enableSearch = !_enableSearch;
-      UIStore.emitChange();
-      break;
-
-    case ActionTypes.TOGGLE_DIR_MAP:
-      _showDirMap = !_showDirMap;
-      UIStore.emitChange();
+    case ActionTypes.SET_DESTINATION:
+      _destination = action.dest;
+      DestinationStore.emitChange();
       break;
 
     default:
@@ -50,4 +40,4 @@ UIStore.dispatchToken = AppDispatcher.register(action => {
   }
 });
 
-module.exports = UIStore;
+module.exports = DestinationStore;

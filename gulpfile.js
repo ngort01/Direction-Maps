@@ -50,10 +50,15 @@ gulp.task('copyIndex', function() {
       .pipe(gulp.dest(webpackConfig.output.path));
 });
 
+gulp.task('copyImg', function() {
+  return gulp.src('app/assets/images/*')
+      .pipe(gulp.dest(path.join(webpackConfig.output.path, '/images')));
+});
+
 // Production build
 gulp.task('build', ['webpack:build']);
 
-gulp.task('webpack:build', ['copyIndex'], function(callback) {
+gulp.task('webpack:build', ['copyIndex', 'copyImg'], function(callback) {
   // modify some webpack config options
   var myConfig = Object.create(webpackConfig);
   myConfig.plugins = myConfig.plugins.concat(
@@ -87,7 +92,7 @@ myDevConfig.debug = true;
 // create a single instance of the compiler to allow caching
 var devCompiler = webpack(myDevConfig);
 
-gulp.task('webpack:build-dev', ['copyIndex'], function(callback) {
+gulp.task('webpack:build-dev', ['copyIndex', 'copyImg'], function(callback) {
   // run webpack
   devCompiler.run(function(err, stats) {
     if (err) {
@@ -100,7 +105,7 @@ gulp.task('webpack:build-dev', ['copyIndex'], function(callback) {
   });
 });
 
-gulp.task('webpack-dev-server', ['copyIndex'], function(callback) {
+gulp.task('webpack-dev-server', ['copyIndex', 'copyImg', 'webpack:build-dev'], function(callback) {
   // modify some webpack config options
   var devServerWebpackConfig = require('./webpack.hot.config.js');
 
