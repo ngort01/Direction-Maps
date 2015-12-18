@@ -9,6 +9,12 @@ module.exports = {
     });
   },
 
+  toggleSearch() {
+    AppDispatcher.dispatch({
+      type: ActionTypes.SHOW_SEARCH,
+    });
+  },
+
   toggleDirMap() {
     AppDispatcher.dispatch({
       type: ActionTypes.TOGGLE_DIR_MAP,

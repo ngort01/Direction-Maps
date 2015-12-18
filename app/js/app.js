@@ -38,21 +38,26 @@ const App = React.createClass({
 
   componentDidMount() {
     GeoCodeStore.addChangeListener(this._onChange);
-    DestinationStore.addChangeListener(this._onChange);
+    DestinationStore.addChangeListener(this._destinationChange);
     UIStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
     GeoCodeStore.removeChangeListener(this._onChange);
-    DestinationStore.removeChangeListener(this._onChange);
+    DestinationStore.removeChangeListener(this._destinationChange);
     UIStore.removeChangeListener(this._onChange);
   },
 
   _onChange() {
     this.setState({
       geoCodeResults: GeoCodeStore.getGeocodeResult(),
-      destination: DestinationStore.getDestination(),
       showDirMap: UIStore.getDirMapStatus()
+    });
+  },
+
+  _destinationChange() {
+    this.setState({
+      destination: DestinationStore.getDestination()
     });
   },
 

@@ -40,6 +40,11 @@ UIStore.dispatchToken = AppDispatcher.register(action => {
       UIStore.emitChange();
       break;
 
+    case ActionTypes.SHOW_SEARCH:
+      _enableSearch = true;
+      UIStore.emitChange();
+      break;
+
     case ActionTypes.TOGGLE_DIR_MAP:
       _showDirMap = !_showDirMap;
       UIStore.emitChange();

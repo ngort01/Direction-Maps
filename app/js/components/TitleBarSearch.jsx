@@ -20,6 +20,15 @@ const TitleBarSearch = React.createClass({
     this.refs.searchInput.focus();
   },
 
+  /*componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (nextProps.destination && Object.keys(nextProps.destination).length) {
+      this.setState({
+        value: nextProps.destination.name
+      });
+    }
+  },*/
+
   _onTabClick(e) {
     Object.keys(this.refs)
       .filter(key => key !== 'searchInput')

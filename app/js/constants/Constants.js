@@ -6,6 +6,7 @@ module.exports = {
     GEOCODE: null,
     SET_DESTINATION: null,
     GET_DIR_MAP: null,
-    TOGGLE_DIR_MAP: null
+    TOGGLE_DIR_MAP: null,
+    SHOW_SEARCH: null
   })
 };
