@@ -45,10 +45,9 @@ module.exports = {
           result = JSON.parse(oReq.responseText).features[0];
           dest.lat = result.geometry.coordinates[1];
           dest.lng = result.geometry.coordinates[0];
-          dest.name = result.properties.street;
+          dest.name = result.properties.street + ' ' + result.properties.housenumber;
           dest.city = result.properties.city;
           dest.state = result.properties.state;
-          console.log(result);
           AppDispatcher.dispatch({
             type: ActionTypes.SET_DESTINATION,
             dest: dest

@@ -37,7 +37,7 @@ const MapView = React.createClass({
   },
 
   _reverseGeocode() {
-    UIActions.toggleSearch();
+    UIActions.showSearch();
     let LatLng = this.destMarker.getLatLng();
     GeocodeActions.reverseGeocode(LatLng.lat, LatLng.lng);
   },

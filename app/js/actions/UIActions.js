@@ -9,7 +9,7 @@ module.exports = {
     });
   },
 
-  toggleSearch() {
+  showSearch() {
     AppDispatcher.dispatch({
       type: ActionTypes.SHOW_SEARCH,
     });
