@@ -17,6 +17,7 @@ import MyMaps from './pages/MyMaps';
 // components
 import TitleBar from './components/TitleBar';
 import DirMap from './components/DirMap';
+import LoadingScreen from './components/LoadingScreen'
 // stores
 import GeoCodeStore from './stores/GeoCodeStore';
 import UIStore from './stores/UIStore';
@@ -66,18 +67,19 @@ const App = React.createClass({
 
     return (
       <div className='app'>
+        <LoadingScreen />
         <TitleBar geoCodeResults={geoCodeResults} destination={destination}/>
         <div className='content'>
           {this.props.children && React.cloneElement(this.props.children, {
             destination: destination
           })}
         </div>
-          <ReactCSSTransitionGroup
-            component='div' transitionName='subpage'
-            transitionEnterTimeout={300} transitionLeaveTimeout={300}
-          >
-            {showDirMap ? <DirMap key='dirmap'/> : null}
-          </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+          component='div' transitionName='subpage'
+          transitionEnterTimeout={300} transitionLeaveTimeout={300}
+        >
+          {showDirMap ? <DirMap key='dirmap'/> : null}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

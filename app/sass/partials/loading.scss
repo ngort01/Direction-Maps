@@ -1,0 +1,19 @@
+
+.overlay {
+  position: absolute;
+  z-index: 20;
+  background-color: rgba(0,0,0,0.5);
+  height: 100%;
+  width: 100%;
+  .spinner {
+    margin-top: 0;
+  }
+  &.loading-screen {
+    span {
+      color: #fff !important;
+      line-height: 130% !important;
+      display: block !important;
+      padding: 16px 32px !important;
+    }
+  }
+}
