@@ -2,23 +2,34 @@ import React from 'react';
 import openseadragon from 'openseadragon';
 //actions
 import UIActions from '../actions/UIActions';
+import DirectionMapActions from '../actions/DirectionMapActions';
 
 const DirMap = React.createClass({
 
   componentDidMount() {
-    let viewer = OpenSeadragon({
+    this.viewer = OpenSeadragon({
       id: 'img-viewer',
       prefixUrl: './images/',
       tileSources: {
         type: 'image',
-        url:  require('../../assets/map.jpg'),
+        url:  this.props.dirmap.url,
         buildPyramid: false
       }
     });
   },
 
-  _onClick() {
+  componentWillUnmount() {
+    this.viewer.destroy();
+    this.viewer = null;
+  },
+
+  _abort() {
     UIActions.toggleDirMap();
+  },
+
+  _save() {
+    let {url, name} = this.props.dirmap;
+    DirectionMapActions.saveDirMap(url, name);
   },
 
   render() {
@@ -27,8 +38,8 @@ const DirMap = React.createClass({
       <div className='img-viewer' id='img-viewer'>
       </div>
       <div className='content-padded'>
-        <button className='btn btn-flat pull-right' onClick={this._onClick}>Save</button>
-        <button className='btn btn-flat pull-right' onClick={this._onClick}>Abort</button>
+        <button className='btn btn-flat pull-right' onClick={this._save}>Save</button>
+        <button className='btn btn-flat pull-right' onClick={this._abort}>Abort</button>
       </div>
     </div>
     );

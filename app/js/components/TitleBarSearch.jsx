@@ -75,7 +75,8 @@ const TitleBarSearch = React.createClass({
     if (window.cordova) {
       cordova.plugins.Keyboard.close();
     }
-    DirectionMapActions.getDirMap(destination.lat, destination.lng, transportationType);
+    console.log(destination);
+    DirectionMapActions.getDirMap(destination.lat, destination.lng, transportationType, destination.name);
   },
 
   _setInputState(state) {

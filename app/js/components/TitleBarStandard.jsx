@@ -15,7 +15,7 @@ const TitleBarStandard = React.createClass({
     return (
       <div>
         <a className='icon icon-more-vertical pull-right'></a>
-        <h1 className='title'>AppName</h1>
+        <h1 className='title'>DirMaps</h1>
         <table className='bar-tabs'>
           <tbody>
             <tr>

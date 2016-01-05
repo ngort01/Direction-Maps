@@ -55,7 +55,6 @@ var LoadingScreen = React.createClass({
   render() {
     let message;
     let {status} = this.state;
-    console.log(status);
     let visibility = status === 'requesting' ? 'visible' : 'hidden';
     //messageStyle = assign(messageStyle, message_style);
 

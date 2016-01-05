@@ -12,6 +12,19 @@
 	height: 100%;
 }
 
+.my-maps {
+  img {
+    width: 42px;
+    height: 42px;
+  }
+  .table-view-cell>a:not(.btn) {
+    padding-right: 16px;
+    .icon {
+      color: $icon-color;
+    }
+  }
+}
+
 
 /**********************************
 ***** Floating Action Button ******

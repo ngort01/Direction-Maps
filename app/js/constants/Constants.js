@@ -13,7 +13,9 @@ module.exports = {
 
     REQUESTING: null,
     REQUEST_FAIL: null,
-    REQUEST_SUCCESS: null
-
+    REQUEST_SUCCESS: null,
+    SAVE_DIRMAP: null,
+    SET_CURRENT_DIRMAP: null,
+    DELETE_DIRMAP: null,
   })
 };

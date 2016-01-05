@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import Constants, {ActionTypes} from '../constants/Constants';
-import GeoCodeApi from '../webApi/GeoCodeApi';
+import GeoCodeApi from '../utils/GeoCodeApi';
 
 module.exports = {
 

@@ -17,11 +17,12 @@ import MyMaps from './pages/MyMaps';
 // components
 import TitleBar from './components/TitleBar';
 import DirMap from './components/DirMap';
-import LoadingScreen from './components/LoadingScreen'
+import LoadingScreen from './components/LoadingScreen';
 // stores
 import GeoCodeStore from './stores/GeoCodeStore';
 import UIStore from './stores/UIStore';
 import DestinationStore from './stores/DestinationStore';
+import DirMapStore from './stores/DirMapStore';
 
 // hash location is needed on mobile device
 //const history = window.cordova ? createHashHistory() : createBrowserHistory();
@@ -33,7 +34,8 @@ const App = React.createClass({
     return {
       geoCodeResults: GeoCodeStore.getGeocodeResult(),
       destination: DestinationStore.getDestination(),
-      showDirMap: UIStore.getDirMapStatus()
+      showDirMap: UIStore.getDirMapStatus(),
+      currentDirMap: DirMapStore.getCurrentDirMap()
     };
   },
 
@@ -41,12 +43,14 @@ const App = React.createClass({
     GeoCodeStore.addChangeListener(this._onChange);
     DestinationStore.addChangeListener(this._destinationChange);
     UIStore.addChangeListener(this._onChange);
+    DirMapStore.addChangeListener(this._dirMapChange);
   },
 
   componentWillUnmount() {
     GeoCodeStore.removeChangeListener(this._onChange);
     DestinationStore.removeChangeListener(this._destinationChange);
     UIStore.removeChangeListener(this._onChange);
+    DirMapStore.removeChangeListener(this._dirMapChange);
   },
 
   _onChange() {
@@ -62,8 +66,14 @@ const App = React.createClass({
     });
   },
 
+  _dirMapChange() {
+    this.setState({
+      destination: DirMapStore.getCurrentDirMap()
+    });
+  },
+
   render() {
-    let {geoCodeResults, destination, showDirMap} = this.state;
+    let {geoCodeResults, destination, showDirMap, currentDirMap} = this.state;
 
     return (
       <div className='app'>
@@ -78,7 +88,7 @@ const App = React.createClass({
           component='div' transitionName='subpage'
           transitionEnterTimeout={300} transitionLeaveTimeout={300}
         >
-          {showDirMap ? <DirMap key='dirmap'/> : null}
+          {showDirMap ? <DirMap key='dirmap' dirmap={currentDirMap}/> : null}
         </ReactCSSTransitionGroup>
       </div>
     );
