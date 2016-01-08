@@ -33,10 +33,10 @@ const MyMaps = React.createClass({
     UIActions.toggleDirMap();
   },
 
-  _delete(key, e) {
+  _delete(key, url, e) {
     console.log('delete');
     e.stopPropagation();
-    DirectionMapActions.deleteDirMap(key);
+    DirectionMapActions.deleteDirMap(key, url);
   },
 
   render() {
@@ -49,7 +49,7 @@ const MyMaps = React.createClass({
         <li className='table-view-cell media' key={key} onClick={this._open.bind(null, key)}>
           <a>
             <img className='media-object pull-left' src={dirMap.url}/>
-            <span className='icon icon-close pull-right' onClick={this._delete.bind(null, key)}/>
+            <span className='icon icon-close pull-right' onClick={this._delete.bind(null, key, dirMap.url)}/>
             <div className='media-body'>
               {dirMap.name}
             </div>

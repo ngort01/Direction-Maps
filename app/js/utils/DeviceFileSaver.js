@@ -54,5 +54,20 @@ module.exports = {
     }
   },
 
+  deleteFile(url) {
+    window.resolveLocalFileSystemURI('file:///example.txt', onResolveSuccess, fail);
+
+    function onResolveSuccess(fileEntry) {
+      fileEntry.remove(function(file) {
+          console.log('File removed!');
+        },function() {
+          console.log('error deleting the file ' + error.code);
+        });
+    }
+
+    function fail(error) {
+      console.log(error.code);
+    }
+  }
 };
 

@@ -75,7 +75,7 @@ const TitleBarSearch = React.createClass({
     if (window.cordova) {
       cordova.plugins.Keyboard.close();
     }
-    console.log(destination);
+    this._setInputState(destination.name + ', ' + destination.city);
     DirectionMapActions.getDirMap(destination.lat, destination.lng, transportationType, destination.name);
   },
 

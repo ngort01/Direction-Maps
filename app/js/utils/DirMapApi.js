@@ -6,8 +6,8 @@ module.exports = {
     AppDispatcher.dispatch({
       type: ActionTypes.REQUESTING
     });
-    // let url = 'http:...&' + lat + ',' + lng + '&' + type;
-    let url = require('../../assets/map.jpg');
+    let url = 'http://giv-direction-maps.uni-muenster.de:3000/map?lon=' + lng + '&lat=' + lat;
+    console.info('REQUESTING: ' + url);
     let  oReq = new XMLHttpRequest();
 
     function reportStatus(e, name) {

@@ -68,7 +68,7 @@ const App = React.createClass({
 
   _dirMapChange() {
     this.setState({
-      destination: DirMapStore.getCurrentDirMap()
+      currentDirMap: DirMapStore.getCurrentDirMap()
     });
   },
 
