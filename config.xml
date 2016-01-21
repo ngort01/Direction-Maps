@@ -4,9 +4,9 @@
     version="0.0.1" 
     xmlns="http://www.w3.org/ns/widgets" 
     xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>TestApp</name>
+    <name>DirMaps</name>
     <description>
-        App that creates direction maps.
+        App that generates direction maps.
     </description>
     <author email="">
     </author>
@@ -22,6 +22,11 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="StatusBarBackgroundColor" value="#1976D2" />
+        <icon src="./platform_assets/icon/icon.png"/>
+        <splash src="./platform_assets/splashscreen/splash.png" density="port-ldpi"/>
+        <splash src="./platform_assets/splashscreen/splash.png" density="port-mdpi"/>
+        <splash src="./platform_assets/splashscreen/splash.png" density="port-hdpi"/>
+        <splash src="./platform_assets/splashscreen/splash.png" density="port-xhdpi"/>
     </platform>
 	
 </widget>
