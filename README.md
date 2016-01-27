@@ -11,7 +11,8 @@ App prototype
 - Install [Cordova](https://cordova.apache.org/): `npm install -g cordova`
 - Inside the project folder:
 	- Install node dependencies: `npm install`
-	- You can write you JS in ES6 style, because Babel loader is used 
+	- All app related code is inside the `/app` folder
+	- You can write your JS in ES6 style, because Babel loader is used 
 
 ### Start Development Server
 - Run `gulp` from terminal within the project folder
