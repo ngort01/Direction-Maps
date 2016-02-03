@@ -32,7 +32,9 @@ var LoadingScreen = React.createClass({
 
   getInitialState() {
     return {
-      status: 'success'
+      status: 'success',
+      visibility: 'hidden',
+      message: ''
     };
   },
 
@@ -47,32 +49,56 @@ var LoadingScreen = React.createClass({
   },
 
   _onChange() {
-    this.setState({
-      status: DirMapStore.getStatus()
-    });
+    let status = DirMapStore.getStatus();
+    let msgStyle = assign({}, messageStyle);
+
+    if (status === 'requesting') {
+      msgStyle.color = 'white';
+
+      this.setState({
+        status: status,
+        visibility: 'visible',
+        message: 'Generating map...'
+      });
+
+    } else if (status === 'request_fail') {
+      msgStyle.color = 'red';
+      this.setState({
+        status: status,
+        message: 'An error occured!'
+      });
+
+      setTimeout(() => {
+        this.setState({
+          visibility: 'hidden'
+        });
+      }, 1000);
+
+    } else {
+
+      msgStyle.color = 'green';
+      this.setState({
+        status: status,
+        message: 'Done!'
+      });
+
+      setTimeout(() => {
+        this.setState({
+          visibility: 'hidden'
+        });
+      }, 500);
+    }
+
+    messageStyle = assign(messageStyle, msgStyle);
   },
 
   render() {
-    let message;
-    let {status} = this.state;
-    let visibility = status === 'requesting' ? 'visible' : 'hidden';
-    //messageStyle = assign(messageStyle, message_style);
-
-    switch (status) {
-      case 'requesting':
-        message = 'Generating map...';
-        break;
-      case 'request_fail':
-        message = 'An error occured!';
-        break;
-      case 'request_success':
-        message = 'Done!';
-        break;
-    }
+    let {status, visibility, message} = this.state;
+    let msgStyle = assign({}, messageStyle);
 
     return (
       <div className='overlay loading-screen' style={{visibility: visibility}}>
-        <span style={messageStyle}>
+        <span style={msgStyle}>
           {message}
         </span>
       </div>

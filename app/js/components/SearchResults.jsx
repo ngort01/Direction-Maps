@@ -27,7 +27,7 @@ const SearchResults = React.createClass({
       features.forEach((f, i) => {
         let props = f.properties;
         let name  = props.name + ', ';
-        let city = props.city ? props.city + ', ' : '';
+        let city = props.city ? props.city : '';
         let state = props.state;
         results.push(
           <li key={i} index={i} onClick={this._onClick.bind(this, i)}>
