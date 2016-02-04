@@ -9,7 +9,7 @@ const DirMap = React.createClass({
   componentDidMount() {
     this.viewer = OpenSeadragon({
       id: 'img-viewer',
-      prefixUrl: './images/',
+      prefixUrl: './controles/',
       tileSources: {
         type: 'image',
         url:  this.props.dirmap.url,

@@ -51,8 +51,8 @@ gulp.task('copyIndex', function() {
 });
 
 gulp.task('copyImg', function() {
-  return gulp.src('app/assets/images/*')
-      .pipe(gulp.dest(path.join(webpackConfig.output.path, '/images')));
+  return gulp.src('app/assets/controles/*')
+      .pipe(gulp.dest(path.join(webpackConfig.output.path, '/controles')));
 });
 
 // Production build

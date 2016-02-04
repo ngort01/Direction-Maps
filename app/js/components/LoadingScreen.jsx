@@ -54,7 +54,7 @@ var LoadingScreen = React.createClass({
 
     if (status === 'requesting') {
       msgStyle.color = 'white';
-
+      messageStyle = assign(messageStyle, msgStyle);
       this.setState({
         status: status,
         visibility: 'visible',
@@ -63,6 +63,7 @@ var LoadingScreen = React.createClass({
 
     } else if (status === 'request_fail') {
       msgStyle.color = 'red';
+      messageStyle = assign(messageStyle, msgStyle);
       this.setState({
         status: status,
         message: 'An error occured!'
@@ -75,8 +76,8 @@ var LoadingScreen = React.createClass({
       }, 1000);
 
     } else {
-
       msgStyle.color = 'green';
+      messageStyle = assign(messageStyle, msgStyle);
       this.setState({
         status: status,
         message: 'Done!'
@@ -89,7 +90,6 @@ var LoadingScreen = React.createClass({
       }, 500);
     }
 
-    messageStyle = assign(messageStyle, msgStyle);
   },
 
   render() {

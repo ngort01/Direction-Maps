@@ -48,6 +48,16 @@
   }
 }
 
+.about {
+  p {
+    color: $text-color;
+  }
+
+  .ifgi_logo{
+    width: 300px;
+  }
+}
+
 @import 'partials/titlebar';
 @import 'partials/dirmap';
 @import 'partials/loading';

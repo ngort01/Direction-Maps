@@ -18,6 +18,8 @@ import MyMaps from './pages/MyMaps';
 import TitleBar from './components/TitleBar';
 import DirMap from './components/DirMap';
 import LoadingScreen from './components/LoadingScreen';
+// actions
+import UIActions from './actions/UIActions';
 // stores
 import GeoCodeStore from './stores/GeoCodeStore';
 import UIStore from './stores/UIStore';
@@ -35,11 +37,13 @@ const App = React.createClass({
       geoCodeResults: GeoCodeStore.getGeocodeResult(),
       destination: DestinationStore.getDestination(),
       showDirMap: UIStore.getDirMapStatus(),
-      currentDirMap: DirMapStore.getCurrentDirMap()
+      currentDirMap: DirMapStore.getCurrentDirMap(),
+      search: UIStore.getSearchStatus()
     };
   },
 
   componentDidMount() {
+    document.addEventListener('backbutton', this._backButton, false);
     GeoCodeStore.addChangeListener(this._onChange);
     DestinationStore.addChangeListener(this._destinationChange);
     UIStore.addChangeListener(this._onChange);
@@ -47,16 +51,29 @@ const App = React.createClass({
   },
 
   componentWillUnmount() {
+    document.removeEventListener('backbutton', this._backButton, false);
     GeoCodeStore.removeChangeListener(this._onChange);
     DestinationStore.removeChangeListener(this._destinationChange);
     UIStore.removeChangeListener(this._onChange);
     DirMapStore.removeChangeListener(this._dirMapChange);
   },
 
+  _backButton() {
+    let exitApp = (navigator.app && navigator.app.exitApp) || (navigator.device && navigator.device.exitApp);
+    if (this.state.showDirMap) {
+      UIActions.toggleDirMap();
+    } else if (this.state.search) {
+      UIActions.toggleSearch();
+    } else {
+      exitApp();
+    }
+  },
+
   _onChange() {
     this.setState({
       geoCodeResults: GeoCodeStore.getGeocodeResult(),
-      showDirMap: UIStore.getDirMapStatus()
+      showDirMap: UIStore.getDirMapStatus(),
+      search: UIStore.getSearchStatus()
     });
   },
 

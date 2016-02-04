@@ -42,7 +42,7 @@ module.exports = {
       function(entry) {
         AppDispatcher.dispatch({
           type: ActionTypes.SAVE_DIRMAP,
-          name: entry.name,
+          name: entry.name.slice(0, entry.name.length - 4),
           dirMap: entry.nativeURL
         });
       },
@@ -55,7 +55,7 @@ module.exports = {
   },
 
   deleteFile(url) {
-    window.resolveLocalFileSystemURI('file:///example.txt', onResolveSuccess, fail);
+    window.resolveLocalFileSystemURI(url, onResolveSuccess, fail);
 
     function onResolveSuccess(fileEntry) {
       fileEntry.remove(function(file) {
